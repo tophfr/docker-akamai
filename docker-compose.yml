@@ -1,0 +1,182 @@
+version: '2.4'
+
+services:
+  noplugin:
+    image: tophfr/akamai:no-plugin
+    build:
+      context: build
+      target: no-plugin
+    network_mode: host
+
+  api-gateway.package:
+    image: tophfr/akamai:api-gateway.package
+    build:
+      context: build
+      target: api-gateway.package
+    network_mode: host
+  api-gateway:
+    image: tophfr/akamai:api-gateway
+    build:
+      context: build
+      target: api-gateway
+    network_mode: host
+  api-keys:
+    image: tophfr/akamai:api-keys
+    build:
+      context: build
+      target: api-keys
+    network_mode: host
+  api-security:
+    image: tophfr/akamai:api-security
+    build:
+      context: build
+      target: api-security
+    network_mode: host
+
+  property:
+    image: tophfr/akamai:property
+    build:
+      context: build
+      target: property
+    network_mode: host
+
+  property-manager.package:
+    image: tophfr/akamai:property-manager.package
+    build:
+      context: build
+      target: property-manager.package
+    network_mode: host
+  property-manager: &pm
+    image: tophfr/akamai:property-manager
+    build:
+      context: build
+      target: snippets
+    network_mode: host
+  pm:
+    <<: *pm
+    image: tophfr/akamai:pm
+  snippets:
+    <<: *pm
+    image: tophfr/akamai:snippets
+  pipeline: &pl
+    image: tophfr/akamai:pipeline
+    build:
+      context: build
+      target: pipeline
+    network_mode: host
+  pl:
+    <<: *pl
+    image: tophfr/akamai:pl
+  cps:
+    image: tophfr/akamai:cps
+    build:
+      context: build
+      target: cps
+    network_mode: host
+
+  firewall.package:
+    image: tophfr/akamai:firewall.package
+    build:
+      context: build
+      target: firewall.package
+    network_mode: host
+  firewall: &fw
+    image: tophfr/akamai:firewall
+    build:
+      context: build
+      target: firewall
+    network_mode: host
+  fw:
+    <<: *fw
+    image: tophfr/akamai:fw
+  site-shield: &ss
+    image: tophfr/akamai:site-shield
+    build:
+      context: build
+      target: site-shield
+    network_mode: host
+  ss:
+    <<: *ss
+    image: tophfr/akamai:ss
+
+  purge:
+    image: tophfr/akamai:purge
+    build:
+      context: build
+      target: purge
+    network_mode: host
+  mpulse: &mp
+    image: tophfr/akamai:mpulse
+    build:
+      context: build
+      target: mpulse
+    network_mode: host
+  mp:
+    <<: *mp
+    image: tophfr/akamai:mp
+  netstorage:
+    image: tophfr/akamai:netstorage
+    build:
+      context: build
+      target: netstorage
+    network_mode: host
+  dns:
+    image: tophfr/akamai:dns
+    build:
+      context: build
+      target: dns
+    network_mode: host
+  appsec:
+    image: tophfr/akamai:appsec
+    build:
+      context: build
+      target: appsec
+    network_mode: host
+  auth:
+    image: tophfr/akamai:auth
+    build:
+      context: build
+      target: auth
+    network_mode: host
+  edgeworkers:
+    image: tophfr/akamai:edgeworkers
+    build:
+      context: build
+      target: edgeworkers
+    network_mode: host
+  adaptive-acceleration: &a2
+    image: tophfr/akamai:adaptive-acceleration
+    build:
+      context: build
+      target: adaptive-acceleration
+    network_mode: host
+  a2:
+    <<: *a2
+    image: tophfr/akamai:a2
+  visitor-prioritization: &vp
+    image: tophfr/akamai:visitor-prioritization
+    build:
+      context: build
+      target: visitor-prioritization
+    network_mode: host
+  vp:
+    <<: *vp
+    image: tophfr/akamai:vp
+  image-manager: &im
+    image: tophfr/akamai:image-manager
+    build:
+      context: build
+      target: image-manager
+    network_mode: host
+  im:
+    <<: *im
+    image: tophfr/akamai:im
+  all: &all
+    image: tophfr/akamai:all
+    build:
+      context: build
+      target: all
+    network_mode: host
+  latest:
+    <<: *all
+    image: tophfr/akamai:latest

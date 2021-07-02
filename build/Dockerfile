@@ -1,7 +1,7 @@
-FROM alpine:3.10 AS no-plugin
+FROM alpine:3.13 AS no-plugin
 MAINTAINER toph <toph@toph.fr>
 RUN apk add --no-cache ca-certificates
-RUN wget -q -O /usr/local/bin/akamai https://github.com/akamai/cli/releases/download/1.1.4/akamai-1.1.4-linuxamd64 \
+RUN wget -q -O /usr/local/bin/akamai https://github.com/akamai/cli/releases/download/1.2.1/akamai-1.2.1-linuxamd64 \
     && chmod a+x /usr/local/bin/akamai
 RUN mkdir -p /root/.akamai-cli/cache
 COPY config /root/.akamai-cli/config
@@ -86,9 +86,12 @@ RUN apk add --no-cache \
         python3
 ENV BUILD_DEPS \
         build-base \
+        cargo \
         libffi-dev \
         openssl-dev \
-        python3-dev
+        python3-dev \
+        py3-pip \
+        rust 
 
 FROM py3_ AS adaptive-acceleration
 RUN apk add --no-cache --virtual .build-deps $BUILD_DEPS \
